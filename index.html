@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+        }
+        body {
+            display: grid;
+            grid-template-areas: 
+                'header header header header'
+                'aside main main main';
+        }
+        header { grid-area: header; }
+        main { grid-area: main;}
+        aside { grid-area: aside;}
+        header, main, aside { border: 1px solid black;}
+        .chosenContact {background-color: deeppink;}
+    </style>
+</head>
+<body>
+    <header><h1>Grymma lurar.se</h1></header>
+    <aside>
+        <h2>Filter</h2>
+        <select name="typeof" id="typeof">
+            <option value="headset">Headset</option>
+            <option value="headphones">Headphones</option>
+        </select><br>
+        Maxpris:
+        <input type="range" min="1" max="2000" value="50" class="slider" name="maxprice" id="maxprice"><br>
+        Bluetooth: <input type="checkbox" name="bluetooth" id="bluetooth"><br>
+        Kontakt:
+        <div id="contactDiv">
+            <button value="usb-a">USB-A</button><br>
+            <button value="usb-c">USB-C</button><br>
+            <button value="3,5mm">3,5mm</button><br>
+            <button value="lightning">Lightning</button><br>
+        </div>
+        <br>
+        <button id="filterButton">Visa produkter</button>
+    </aside>
+    <main>Produkter</main>
+
+    <script>
+        // ############
+        // Functions
+        // ############
+
+        // Toggle class on chosen buttons
+        const updateContacts = (e) => {
+            e.target.classList.toggle("chosenContact");
+        }
+
+        // Create filterobject 
+        const filterProducts = () => {
+            let obj = {};
+            obj.typeof = document.querySelector('#typeof').value;
+            obj.bluetooth = (document.querySelector('#bluetooth:checked') === null ? 0 : 1); 
+            obj.maxprice = document.querySelector('#maxprice').value;
+            obj.contacts = [];
+
+            // Select all buttons from classname and loop through collection
+            const chosenContactsCollection = document.querySelectorAll('.chosenContact');
+            for (let i = 0; i < chosenContactsCollection.length; i++) {
+                obj.contacts.push(chosenContactsCollection[i].value);
+            }
+
+            console.log(JSON.stringify(obj));
+        }
+
+        
+        // ############
+        // Listeners
+        // ############
+
+        document.querySelector('#contactDiv').addEventListener("click", updateContacts);
+        document.querySelector("#filterButton").addEventListener("click", filterProducts);
+    </script>
+</body>
+</html>
