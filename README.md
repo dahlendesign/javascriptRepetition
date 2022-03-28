@@ -1,5 +1,7 @@
 # javascriptRepetition
 
+![Skiss](Bild1.png)
+
 * Bygg en HTML-sida som typ liknar skissen. Lägg inte för mycket tid på att styla.
 * Skapa en funktion i JavaScript som körs när man trycker på ”Visa produkter”.
 * Funktionen ska skapa ett objekt som ska ha properties som matchar valda filter. Detta objekt skulle sedan kunna ha skickats till ett API för att få tillbaka matchande produkter (obs detta ska ni inte göra). Skriva ut objektet i console med JSON.stringify().
